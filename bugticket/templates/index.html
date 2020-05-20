@@ -2,6 +2,12 @@
 <h2>Welcome {{user.display_name}},</h2>
 <p>Your user name is, <b>{{user.username}}</b></p>
 <p>Your display name is, <b>{{user.display_name}}</b></p>
+<details
+  ><summary>Create Ticket</summary>
+  <form action="" method="post">
+    {% csrf_token %} {{form.as_p}} <input type="submit" value="Add Ticket" />
+  </form>
+</details>
 {%endif%}
 <a href="{%url 'signup'%}"><button>Create an account</button></a>
 <a href="{%url 'logout_url'%}"><button>Logout</button></a>
