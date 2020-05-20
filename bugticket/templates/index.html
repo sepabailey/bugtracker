@@ -1,0 +1,7 @@
+{% if user.is_authenticated %}
+<h2>Welcome {{user.display_name}},</h2>
+<p>Your user name is, <b>{{user.username}}</b></p>
+<p>Your display name is, <b>{{user.display_name}}</b></p>
+{%endif%}
+<a href="{%url 'signup'%}"><button>Create an account</button></a>
+<a href="{%url 'logout_url'%}"><button>Logout</button></a>
