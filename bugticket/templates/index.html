@@ -2,12 +2,40 @@
 <h2>Welcome {{user.display_name}},</h2>
 <p>Your user name is, <b>{{user.username}}</b></p>
 <p>Your display name is, <b>{{user.display_name}}</b></p>
-<details
-  ><summary>Create Ticket</summary>
-  <form action="" method="post">
-    {% csrf_token %} {{form.as_p}} <input type="submit" value="Add Ticket" />
-  </form>
-</details>
+
 {%endif%}
+
+<b>New Tickets:</b>
+{%for ticket in ticket_data%}
+{% if ticket.ticket_status == "NEW" %}
+  <p><a href = {% url 'ticket_detail' id=ticket.id%}>{{ticket.title}}</a> | {{ticket.date}} | Assigned to: {{ticket.assigned_user}} | Status: {{ticket.ticket_status}}</p>
+  {% endif %}
+{% endfor %}
+<hr>
+
+<b>In Progress:</b>
+{%for ticket in ticket_data%}
+{% if ticket.ticket_status == "IN PROGRESS" %}
+  <p><a href = {% url 'ticket_detail' id=ticket.id%}>{{ticket.title}}</a> | {{ticket.date}} | Assigned to: {{ticket.assigned_user}} | Status: {{ticket.ticket_status}}</p>
+  {% endif %}
+{% endfor %}
+<hr>
+
+<b>Completed:</b>
+{%for ticket in ticket_data%}
+{% if ticket.ticket_status == "DONE" %}
+  <p><a href = {% url 'ticket_detail' id=ticket.id%}>{{ticket.title}}</a> | {{ticket.date}} | Assigned to: {{ticket.assigned_user}} | Status: {{ticket.ticket_status}}</p>
+  {% endif %}
+{% endfor %}
+<hr>
+
+<b>Invalid:</b>
+{%for ticket in ticket_data%}
+{% if ticket.ticket_status == "INVALID" %}
+  <p><a href = {% url 'ticket_detail' id=ticket.id%}>{{ticket.title}}</a> | {{ticket.date}} | Assigned to: {{ticket.assigned_user}} | Status: {{ticket.ticket_status}}</p>
+  {% endif %}
+{% endfor %}
+
+<a href={%url 'new_ticket_form' user_id=user.id%}><button>Create New Ticket</button></a>
 <a href="{%url 'signup'%}"><button>Create an account</button></a>
 <a href="{%url 'logout_url'%}"><button>Logout</button></a>

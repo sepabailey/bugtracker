@@ -14,9 +14,6 @@ class SignupForm(UserCreationForm):
         fields = ('username', 'display_name', 'password1', 'password2')
 
 
-class TicketForm(forms.ModelForm):
-    class Meta:
-        model = Ticket
-        fields = [
-            'title', 'date', 'description', 'filed_user', 'ticket_status', 'assigned_user', 'completed_user'
-        ]
+class TicketForm(forms.Form):
+    title = forms.CharField(max_length=50)
+    description = forms.CharField(widget=forms.Textarea)

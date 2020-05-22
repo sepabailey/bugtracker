@@ -25,10 +25,15 @@ class Ticket(models.Model):
     date = models.DateTimeField(default=timezone.now)
     description = models.TextField()
     filed_user = models.ForeignKey(
-        get_user_model(), related_name='filed_user', on_delete=models.CASCADE)
+        # https://stackoverflow.com/questions/25964312/not-null-constraint-failed-after-adding-to-models-py
+        # https://stackoverflow.com/questions/4604814/django-model-field-default-to-null
+        get_user_model(), related_name='filed_user', on_delete=models.CASCADE, default=None, null=True, blank=True)
     ticket_status = models.CharField(
         max_length=25, choices=STATUS_CHOICES, default=NEW)
     assigned_user = models.ForeignKey(
-        get_user_model(), related_name='assigned_user', on_delete=models.CASCADE)
+        get_user_model(), related_name='assigned_user', on_delete=models.CASCADE, default=None, null=True, blank=True)
     completed_user = models.ForeignKey(
-        get_user_model(), related_name='completed_user', on_delete=models.CASCADE)
+        get_user_model(), related_name='completed_user', on_delete=models.CASCADE, default=None, null=True, blank=True)
+
+    def __str__(self):
+        return self.title

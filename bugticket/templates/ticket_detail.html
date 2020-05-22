@@ -1,4 +1,4 @@
-Ticket Detail:
+<b>Ticket Detail</b>:
 <p>
   Ticket Title: {{ticket.title}}
 </p>
@@ -14,9 +14,21 @@ Ticket Detail:
 <p>
   Ticket Status: {{ticket.ticket_status}}
 </p>
+<!-- https://stackoverflow.com/questions/47944443/django-getting-error-reverse-for-detail-with-no-arguments-not-found-1-patt -->
 <p>
-  Ticket Assigned To: {{ticket.assigned_user}}
+  Ticket Assigned To:{{ticket.assigned_user}}
 </p>
 <p>
   Completed By: {{ticket.completed_user}}
 </p>
+
+<a href={%url 'in_progress' ticket_id=ticket.id%}
+  ><button>In Progress</button></a>
+<a href={%url 'complete_progress' ticket_id=ticket.id%}
+  ><button>Complete</button></a>
+<a href={%url 'invalid_progress' ticket_id=ticket.id%}
+  ><button>Invalid</button></a>
+<a href={%url 'edit' ticket_id=ticket.id%}
+  ><button>Edit</button></a>
+
+  <a href="{%url 'homepage'%}">Back</a>
